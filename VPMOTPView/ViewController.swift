@@ -17,6 +17,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         otpView.otpFieldsCount = 5
+        otpView.otpFieldBorderColor = UIColor.red
+        otpView.otpFieldBorderWidth = 5
+        
+        // Create the UI
+        otpView.initalizeUI()
     }
 
     override func didReceiveMemoryWarning() {

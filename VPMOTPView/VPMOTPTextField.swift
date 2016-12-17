@@ -9,26 +9,27 @@
 import UIKit
 
 class VPMOTPTextField: UITextField {
+    /// Border color and width info for field
+    var borderColor: UIColor = UIColor.black
+    var borderWidth: CGFloat = 2
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        initalizeUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        initalizeUI()
     }
     
-    fileprivate func initalizeUI() {
+    func initalizeUI() {
+        // Basic UI setup
         layer.cornerRadius = bounds.size.width / 2
-        layer.borderColor = UIColor.red.cgColor
-        layer.borderWidth = 2
+        layer.borderColor = borderColor.cgColor
+        layer.borderWidth = borderWidth
         
         autocorrectionType = .no
         textAlignment = .center
