@@ -9,6 +9,12 @@
 import UIKit
 
 class VPMOTPView: UIView {
+    /// Different display type for text fields
+    enum DisplayType {
+        case circular
+        case square
+    }
+    
     /// Different input type for OTP fields
     enum KeyboardType: Int {
         case numeric
@@ -16,16 +22,19 @@ class VPMOTPView: UIView {
         case alphaNumeric
     }
     
-    /// Defines the number of otp field needed. Defaults to 4.
+    /// Define the display type for OTP fields. Defaults to `circular`.
+    var otpFieldDisplayType: DisplayType = .circular
+    
+    /// Defines the number of OTP field needed. Defaults to 4.
     var otpFieldsCount: Int = 4
     
-    /// Defines the type of the data that can be entered into otp fields. Defaults to `numeric`
-    var otpFieldType: KeyboardType = .numeric
+    /// Defines the type of the data that can be entered into OTP fields. Defaults to `numeric`
+    var otpFieldInputType: KeyboardType = .numeric
     
-    /// Defines the size of otp field. Defaults to `60`.
+    /// Defines the size of OTP field. Defaults to `60`.
     var otpFieldSize: CGFloat = 60
     
-    /// Space between 2 otp field. Defaults to `16`.
+    /// Space between 2 OTP field. Defaults to `16`.
     var otpFieldSeparatorSpace: CGFloat = 16
     
     /// Color to be used for border of the OTP field. Defaults to `black` color.
@@ -68,7 +77,7 @@ class VPMOTPView: UIView {
         otpField.tag = index + 1
         
         // Set input type for OTP fields
-        switch otpFieldType {
+        switch otpFieldInputType {
         case .numeric:
             otpField.keyboardType = .numberPad
         case .alphabet:
@@ -82,7 +91,7 @@ class VPMOTPView: UIView {
         otpField.borderWidth = otpFieldBorderWidth
         
         // Finally create the fields
-        otpField.initalizeUI()
+        otpField.initalizeUI(forFieldType: otpFieldDisplayType)
         
         return otpField
     }
@@ -124,7 +133,7 @@ extension VPMOTPView: UITextFieldDelegate {
         let replacedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
         
         // Check since only alphabet keyboard is not available in iOS
-        if replacedText.characters.count > 0 && otpFieldType == .alphabet && replacedText.rangeOfCharacter(from: .letters) == nil {
+        if replacedText.characters.count > 0 && otpFieldInputType == .alphabet && replacedText.rangeOfCharacter(from: .letters) == nil {
             return false
         }
         

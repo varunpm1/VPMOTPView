@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         
         otpView.otpFieldsCount = 5
         otpView.otpFieldBorderColor = UIColor.red
-        otpView.otpFieldBorderWidth = 5
+        otpView.otpFieldBorderWidth = 2
         
         // Create the UI
         otpView.initalizeUI()

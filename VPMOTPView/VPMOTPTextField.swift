@@ -25,9 +25,15 @@ class VPMOTPTextField: UITextField {
         super.init(coder: aDecoder)
     }
     
-    func initalizeUI() {
+    func initalizeUI(forFieldType type: VPMOTPView.DisplayType) {
+        switch type {
+        case .circular:
+            layer.cornerRadius = bounds.size.width / 2
+        case .square:
+            layer.cornerRadius = 0
+        }
+        
         // Basic UI setup
-        layer.cornerRadius = bounds.size.width / 2
         layer.borderColor = borderColor.cgColor
         layer.borderWidth = borderWidth
         
