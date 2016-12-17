@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         otpView.otpFieldsCount = 5
         otpView.otpFieldBorderColor = UIColor.red
         otpView.otpFieldBorderWidth = 2
+        otpView.delegate = self
         
         // Create the UI
         otpView.initalizeUI()
@@ -30,3 +31,13 @@ class ViewController: UIViewController {
     }
 }
 
+
+extension ViewController: VPMOTPViewDelegate {
+    func hasEnteredAllOTP(hasEntered: Bool) {
+        print("Has entered all OTP? \(hasEntered)")
+    }
+    
+    func enteredOTP(otpString: String) {
+        print("OTPString: \(otpString)")
+    }
+}

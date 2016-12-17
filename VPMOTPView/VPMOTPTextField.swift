@@ -9,8 +9,10 @@
 import UIKit
 
 class VPMOTPTextField: UITextField {
-    /// Border color and width info for field
+    /// Border color info for field
     var borderColor: UIColor = UIColor.black
+    
+    /// Border width info for field
     var borderWidth: CGFloat = 2
     
     override func awakeFromNib() {

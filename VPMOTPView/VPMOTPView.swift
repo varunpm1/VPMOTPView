@@ -8,6 +8,18 @@
 
 import UIKit
 
+protocol VPMOTPViewDelegate: class {
+    /// Called whenever all the OTP fields have been entered. It'll be called immediately after `hasEnteredAllOTP` delegate method is called.
+    ///
+    /// - parameter otpString: The entered otp characters
+    func enteredOTP(otpString: String)
+    
+    /// Called whenever an OTP is entered.
+    ///
+    /// - parameter hasEntered: `hasEntered` will be `true` if all the OTP fields have been filled.
+    func hasEnteredAllOTP(hasEntered: Bool)
+}
+
 class VPMOTPView: UIView {
     /// Different display type for text fields
     enum DisplayType {
@@ -45,6 +57,8 @@ class VPMOTPView: UIView {
     
     /// If set, then editing can be done to intermediate fields even though previous fields are empty. Else editing will take place from last filled text field only. Defaults to `true`.
     var shouldAllowIntermediateEditing: Bool = true
+    
+    weak var delegate: VPMOTPViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -122,6 +136,32 @@ class VPMOTPView: UIView {
         
         return isTextFilled
     }
+    
+    // Helper function to get the OTP String entered
+    fileprivate func calculateEnteredOTPSTring(isDeleted: Bool) {
+        if isDeleted {
+            delegate?.hasEnteredAllOTP(hasEntered: false)
+        }
+        else {
+            var enteredOTPString = ""
+            
+            // Check for entered OTP
+            for index in stride(from: 0, to: otpFieldsCount, by: 1) {
+                let otpField = viewWithTag(index + 1) as? VPMOTPTextField
+                
+                if let otpFieldText = otpField?.text, otpFieldText.characters.count > 0 {
+                    enteredOTPString.append(otpFieldText)
+                }
+            }
+            
+            // Check if all OTP fields have been filled or not. Based on that call the 2 delegate methods.
+            delegate?.hasEnteredAllOTP(hasEntered: (enteredOTPString.characters.count == otpFieldsCount))
+            
+            if enteredOTPString.characters.count == otpFieldsCount {
+                delegate?.enteredOTP(otpString: enteredOTPString)
+            }
+        }
+    }
 }
 
 extension VPMOTPView: UITextFieldDelegate {
@@ -150,6 +190,9 @@ extension VPMOTPView: UITextFieldDelegate {
                 textField.resignFirstResponder()
             }
             
+            // Get the entered string
+            calculateEnteredOTPSTring(isDeleted: false)
+            
             return false
         }
         else if replacedText.characters.count == 0 {
@@ -162,9 +205,18 @@ extension VPMOTPView: UITextFieldDelegate {
                 prevOTPField.becomeFirstResponder()
             }
             
+            // Get the entered string
+            calculateEnteredOTPSTring(isDeleted: true)
+            
             return false
         }
         
-        return true
+        // If nothing, then set the text
+        textField.text = replacedText
+        
+        // Get the entered string
+        calculateEnteredOTPSTring(isDeleted: false)
+        
+        return false
     }
 }
