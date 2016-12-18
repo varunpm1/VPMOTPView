@@ -60,10 +60,12 @@ class VPMOTPTextField: UITextField {
             layer.cornerRadius = 0
         case .diamond:
             addDiamondMask()
+        case .underlinedBottom:
+            addBottomView()
         }
         
         // Basic UI setup
-        if type != .diamond {
+        if type != .diamond && type != .underlinedBottom {
             layer.borderColor = borderColor.cgColor
             layer.borderWidth = borderWidth
         }
@@ -85,6 +87,22 @@ class VPMOTPTextField: UITextField {
         maskLayer.path = path.cgPath
         
         layer.mask = maskLayer
+        
+        shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.lineWidth = borderWidth
+        shapeLayer.fillColor = backgroundColor?.cgColor
+        shapeLayer.strokeColor = borderColor.cgColor
+        
+        layer.addSublayer(shapeLayer)
+    }
+    
+    // Helper function to create a underlined bottom view
+    fileprivate func addBottomView() {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: bounds.size.height))
+        path.addLine(to: CGPoint(x: bounds.size.width, y: bounds.size.height))
+        path.close()
         
         shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath

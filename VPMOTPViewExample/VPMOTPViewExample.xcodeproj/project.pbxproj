@@ -42,8 +42,8 @@
 		961D27791E06B86B00AEE0B4 /* VPMOTPView */ = {
 			isa = PBXGroup;
 			children = (
-				961D277A1E06B86B00AEE0B4 /* VPMOTPTextField.swift */,
 				961D277B1E06B86B00AEE0B4 /* VPMOTPView.swift */,
+				961D277A1E06B86B00AEE0B4 /* VPMOTPTextField.swift */,
 			);
 			name = VPMOTPView;
 			path = ../../VPMOTPView;

@@ -49,6 +49,7 @@ class VPMOTPView: UIView {
         case circular
         case square
         case diamond
+        case underlinedBottom
     }
     
     /// Different input type for OTP fields.
@@ -274,7 +275,7 @@ extension VPMOTPView: UITextFieldDelegate {
                 }
             }
             
-            if otpFieldDisplayType == .diamond {
+            if otpFieldDisplayType == .diamond || otpFieldDisplayType == .underlinedBottom {
                 (textField as! VPMOTPTextField).shapeLayer.fillColor = otpFieldEnteredBackgroundColor.cgColor
                 (textField as! VPMOTPTextField).shapeLayer.strokeColor = otpFieldEnteredBorderColor.cgColor
             }
@@ -300,7 +301,7 @@ extension VPMOTPView: UITextFieldDelegate {
             secureEntryData[textField.tag - 1] = ""
             textField.text = ""
             
-            if otpFieldDisplayType == .diamond {
+            if otpFieldDisplayType == .diamond || otpFieldDisplayType == .underlinedBottom {
                 (textField as! VPMOTPTextField).shapeLayer.fillColor = otpFieldDefaultBackgroundColor.cgColor
                 (textField as! VPMOTPTextField).shapeLayer.strokeColor = otpFieldDefaultBorderColor.cgColor
             }
