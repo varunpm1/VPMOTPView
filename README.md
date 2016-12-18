@@ -13,9 +13,11 @@ Drag and drop the folder `VPMOTPView` into your project. Add a view wherever nee
 
 Set the delegate of `VPMOTPView` instance, if needed, to handle 2 protocol methods for identifying if all the codes have been entered and to receive the entered code.
 
-# ![Screenshot](/Circular.png =200x400) ![Screenshot](/Secure.png =200x400) 
+# ![Screenshot](/Circular.png)
+# ![Screenshot](/Secure.png)
 
-# ![Screenshot](/Square.png) ![Screenshot](/AppleFilled.png)
+# ![Screenshot](/Square.png)
+# ![Screenshot](/AppleFilled.png)
 
 ## Contributing
 **Type - 1**
