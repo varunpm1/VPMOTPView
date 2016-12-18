@@ -21,7 +21,7 @@ The UI can further be modified based on border color, background color, data inp
 # ![Screenshot](/Secure.png)
 # ![Screenshot](/Square.png)
 # ![Screenshot](/AppleFilled.png)
-# ![Screenshot](/UnderlinedBottom.png)
+# ![Screenshot](/Underlined.png)
 
 ## Contributing
 **Type - 1**
