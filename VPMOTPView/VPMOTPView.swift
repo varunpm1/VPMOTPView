@@ -25,6 +25,7 @@ class VPMOTPView: UIView {
     enum DisplayType {
         case circular
         case square
+        case diamond
     }
     
     /// Different input type for OTP fields.
@@ -208,7 +209,7 @@ extension VPMOTPView: UITextFieldDelegate {
             secureEntryData[textField.tag - 1] = string
             
             if otpFilledEntryDisplay {
-                textField.text = ""
+                textField.text = " "
             }
             else {
                 if otpFieldEntrySecureType {
@@ -219,8 +220,14 @@ extension VPMOTPView: UITextFieldDelegate {
                 }
             }
             
-            textField.backgroundColor = otpFieldEnteredBackgroundColor
-            textField.layer.borderColor = otpFieldEnteredBorderColor.cgColor
+            if otpFieldDisplayType == .diamond {
+                (textField as! VPMOTPTextField).shapeLayer.fillColor = otpFieldEnteredBackgroundColor.cgColor
+                (textField as! VPMOTPTextField).shapeLayer.strokeColor = otpFieldEnteredBorderColor.cgColor
+            }
+            else {
+                textField.backgroundColor = otpFieldEnteredBackgroundColor
+                textField.layer.borderColor = otpFieldEnteredBorderColor.cgColor
+            }
             
             let nextOTPField = viewWithTag(textField.tag + 1)
             
@@ -238,8 +245,15 @@ extension VPMOTPView: UITextFieldDelegate {
             // If deleting the text, then move to previous text field if present
             secureEntryData[textField.tag - 1] = ""
             textField.text = ""
-            textField.backgroundColor = otpFieldDefaultBackgroundColor
-            textField.layer.borderColor = otpFieldDefaultBorderColor.cgColor
+            
+            if otpFieldDisplayType == .diamond {
+                (textField as! VPMOTPTextField).shapeLayer.fillColor = otpFieldDefaultBackgroundColor.cgColor
+                (textField as! VPMOTPTextField).shapeLayer.strokeColor = otpFieldDefaultBorderColor.cgColor
+            }
+            else {
+                textField.backgroundColor = otpFieldDefaultBackgroundColor
+                textField.layer.borderColor = otpFieldDefaultBorderColor.cgColor
+            }
             
             let prevOTPField = viewWithTag(textField.tag - 1)
             
