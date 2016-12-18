@@ -53,6 +53,12 @@ class VPMOTPView: UIView {
     /// If set to `true`, then the content inside OTP field will not be displayed. Instead whatever was set in `otpFieldEnteredBorderColor` will be used to mask the passcode. If `otpFieldEntrySecureType` is set to `true`, then it'll be ignored. This acts similar to Apple's lock code. Defaults to `false`.
     var otpFilledEntryDisplay: Bool = false
     
+    /// If set to `false`, the blinking cursor for OTP field will not be visible. Defaults to `true`.
+    var shouldRequireCursor: Bool = true
+    
+    /// If `shouldRequireCursor` is set to `false`, then this property will not have any effect. If `true`, then the color of cursor can be changed using this property. Defaults to `blue` color.
+    var cursorColor: UIColor = UIColor.blue
+    
     /// Defines the size of OTP field. Defaults to `60`.
     var otpFieldSize: CGFloat = 60
     
@@ -88,6 +94,9 @@ class VPMOTPView: UIView {
     //MARK: Public functions
     /// Call this method to create the OTP field view. This method should be called at the last after necessary customization needed. If any property is modified at a later stage is simply ignored.
     func initalizeUI() {
+        self.layer.masksToBounds = true
+        self.layoutIfNeeded()
+        
         initalizeOTPFields()
     }
     
@@ -111,7 +120,22 @@ class VPMOTPView: UIView {
     
     // Initalize the required OTP fields
     fileprivate func getOTPField(forIndex index: Int) -> VPMOTPTextField {
-        let otpField = VPMOTPTextField(frame: CGRect(x: CGFloat(index) * (otpFieldSize + otpFieldSeparatorSpace), y: 0, width: otpFieldSize, height: otpFieldSize))
+        let hasOddNumberOfFields = (otpFieldsCount % 2 == 1)
+        var fieldFrame = CGRect(x: 0, y: 0, width: otpFieldSize, height: otpFieldSize)
+        
+        // If odd, then center of self will be center of middle field. If false, then center of self will be center of space between 2 middle fields.
+        if hasOddNumberOfFields {
+            // Calculate from middle each fields x and y values so as to align the entire view in center
+            fieldFrame.origin.x = bounds.size.width / 2 - (CGFloat(otpFieldsCount / 2 - index) * (otpFieldSize + otpFieldSeparatorSpace) + otpFieldSize / 2)
+        }
+        else {
+            // Calculate from middle each fields x and y values so as to align the entire view in center
+            fieldFrame.origin.x = bounds.size.width / 2 - (CGFloat(otpFieldsCount / 2 - index) * otpFieldSize + CGFloat(otpFieldsCount / 2 - index - 1) * otpFieldSeparatorSpace + otpFieldSeparatorSpace / 2)
+        }
+        
+        fieldFrame.origin.y = (bounds.size.height - otpFieldSize) / 2
+        
+        let otpField = VPMOTPTextField(frame: fieldFrame)
         otpField.delegate = self
         otpField.tag = index + 1
         otpField.font = otpFieldFont
@@ -129,6 +153,13 @@ class VPMOTPView: UIView {
         // Set the border values if needed
         otpField.borderColor = otpFieldDefaultBorderColor
         otpField.borderWidth = otpFieldBorderWidth
+        
+        if shouldRequireCursor {
+            otpField.tintColor = cursorColor
+        }
+        else {
+            otpField.tintColor = UIColor.clear
+        }
         
         // Set the default background color when text not set
         otpField.backgroundColor = otpFieldDefaultBackgroundColor
