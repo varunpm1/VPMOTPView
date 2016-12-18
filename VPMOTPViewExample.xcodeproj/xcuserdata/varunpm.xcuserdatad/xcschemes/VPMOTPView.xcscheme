@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "96EB107B1E01B3AF0002682A"
-               BuildableName = "VPMOTPView.app"
-               BlueprintName = "VPMOTPView"
-               ReferencedContainer = "container:VPMOTPView.xcodeproj">
+               BuildableName = "VPMOTPViewExample.app"
+               BlueprintName = "VPMOTPViewExample"
+               ReferencedContainer = "container:VPMOTPViewExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96EB107B1E01B3AF0002682A"
-            BuildableName = "VPMOTPView.app"
-            BlueprintName = "VPMOTPView"
-            ReferencedContainer = "container:VPMOTPView.xcodeproj">
+            BuildableName = "VPMOTPViewExample.app"
+            BlueprintName = "VPMOTPViewExample"
+            ReferencedContainer = "container:VPMOTPViewExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96EB107B1E01B3AF0002682A"
-            BuildableName = "VPMOTPView.app"
-            BlueprintName = "VPMOTPView"
-            ReferencedContainer = "container:VPMOTPView.xcodeproj">
+            BuildableName = "VPMOTPViewExample.app"
+            BlueprintName = "VPMOTPViewExample"
+            ReferencedContainer = "container:VPMOTPViewExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96EB107B1E01B3AF0002682A"
-            BuildableName = "VPMOTPView.app"
-            BlueprintName = "VPMOTPView"
-            ReferencedContainer = "container:VPMOTPView.xcodeproj">
+            BuildableName = "VPMOTPViewExample.app"
+            BlueprintName = "VPMOTPViewExample"
+            ReferencedContainer = "container:VPMOTPViewExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

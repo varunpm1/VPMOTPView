@@ -7,25 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		961D27771E06B80C00AEE0B4 /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D27751E06B80C00AEE0B4 /* VPMOTPTextField.swift */; };
+		961D27781E06B80C00AEE0B4 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D27761E06B80C00AEE0B4 /* VPMOTPView.swift */; };
 		96EB10801E01B3AF0002682A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB107F1E01B3AF0002682A /* AppDelegate.swift */; };
 		96EB10821E01B3AF0002682A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB10811E01B3AF0002682A /* ViewController.swift */; };
 		96EB10851E01B3AF0002682A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96EB10831E01B3AF0002682A /* Main.storyboard */; };
 		96EB10871E01B3AF0002682A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96EB10861E01B3AF0002682A /* Assets.xcassets */; };
 		96EB108A1E01B3AF0002682A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96EB10881E01B3AF0002682A /* LaunchScreen.storyboard */; };
-		96EB10921E01B4590002682A /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB10911E01B4590002682A /* VPMOTPView.swift */; };
-		96EB10961E01B4B90002682A /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB10951E01B4B90002682A /* VPMOTPTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		96EB107C1E01B3AF0002682A /* VPMOTPView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPMOTPView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		961D27751E06B80C00AEE0B4 /* VPMOTPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
+		961D27761E06B80C00AEE0B4 /* VPMOTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
+		96EB107C1E01B3AF0002682A /* VPMOTPViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPMOTPViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EB107F1E01B3AF0002682A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96EB10811E01B3AF0002682A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		96EB10841E01B3AF0002682A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		96EB10861E01B3AF0002682A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96EB10891E01B3AF0002682A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		96EB108B1E01B3AF0002682A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96EB10911E01B4590002682A /* VPMOTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
-		96EB10951E01B4B90002682A /* VPMOTPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,10 +39,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		961D27741E06B80C00AEE0B4 /* VPMOTPView */ = {
+			isa = PBXGroup;
+			children = (
+				961D27751E06B80C00AEE0B4 /* VPMOTPTextField.swift */,
+				961D27761E06B80C00AEE0B4 /* VPMOTPView.swift */,
+			);
+			path = VPMOTPView;
+			sourceTree = SOURCE_ROOT;
+		};
 		96EB10731E01B3AF0002682A = {
 			isa = PBXGroup;
 			children = (
-				96EB107E1E01B3AF0002682A /* VPMOTPView */,
+				96EB107E1E01B3AF0002682A /* VPMOTPViewExample */,
 				96EB107D1E01B3AF0002682A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,32 +59,31 @@
 		96EB107D1E01B3AF0002682A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				96EB107C1E01B3AF0002682A /* VPMOTPView.app */,
+				96EB107C1E01B3AF0002682A /* VPMOTPViewExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		96EB107E1E01B3AF0002682A /* VPMOTPView */ = {
+		96EB107E1E01B3AF0002682A /* VPMOTPViewExample */ = {
 			isa = PBXGroup;
 			children = (
 				96EB107F1E01B3AF0002682A /* AppDelegate.swift */,
 				96EB10811E01B3AF0002682A /* ViewController.swift */,
 				96EB10831E01B3AF0002682A /* Main.storyboard */,
-				96EB10911E01B4590002682A /* VPMOTPView.swift */,
-				96EB10951E01B4B90002682A /* VPMOTPTextField.swift */,
+				961D27741E06B80C00AEE0B4 /* VPMOTPView */,
 				96EB10861E01B3AF0002682A /* Assets.xcassets */,
 				96EB10881E01B3AF0002682A /* LaunchScreen.storyboard */,
 				96EB108B1E01B3AF0002682A /* Info.plist */,
 			);
-			path = VPMOTPView;
+			path = VPMOTPViewExample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		96EB107B1E01B3AF0002682A /* VPMOTPView */ = {
+		96EB107B1E01B3AF0002682A /* VPMOTPViewExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96EB108E1E01B3AF0002682A /* Build configuration list for PBXNativeTarget "VPMOTPView" */;
+			buildConfigurationList = 96EB108E1E01B3AF0002682A /* Build configuration list for PBXNativeTarget "VPMOTPViewExample" */;
 			buildPhases = (
 				96EB10781E01B3AF0002682A /* Sources */,
 				96EB10791E01B3AF0002682A /* Frameworks */,
@@ -85,9 +93,9 @@
 			);
 			dependencies = (
 			);
-			name = VPMOTPView;
+			name = VPMOTPViewExample;
 			productName = VPMOTPView;
-			productReference = 96EB107C1E01B3AF0002682A /* VPMOTPView.app */;
+			productReference = 96EB107C1E01B3AF0002682A /* VPMOTPViewExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -106,7 +114,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 96EB10771E01B3AF0002682A /* Build configuration list for PBXProject "VPMOTPView" */;
+			buildConfigurationList = 96EB10771E01B3AF0002682A /* Build configuration list for PBXProject "VPMOTPViewExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -119,7 +127,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				96EB107B1E01B3AF0002682A /* VPMOTPView */,
+				96EB107B1E01B3AF0002682A /* VPMOTPViewExample */,
 			);
 		};
 /* End PBXProject section */
@@ -142,10 +150,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				961D27781E06B80C00AEE0B4 /* VPMOTPView.swift in Sources */,
 				96EB10821E01B3AF0002682A /* ViewController.swift in Sources */,
-				96EB10921E01B4590002682A /* VPMOTPView.swift in Sources */,
 				96EB10801E01B3AF0002682A /* AppDelegate.swift in Sources */,
-				96EB10961E01B4B90002682A /* VPMOTPTextField.swift in Sources */,
+				961D27771E06B80C00AEE0B4 /* VPMOTPTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = VPMOTPView/Info.plist;
+				INFOPLIST_FILE = VPMOTPViewExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = VPM.VPMOTPView;
@@ -279,7 +287,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = VPMOTPView/Info.plist;
+				INFOPLIST_FILE = VPMOTPViewExample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = VPM.VPMOTPView;
@@ -291,7 +299,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		96EB10771E01B3AF0002682A /* Build configuration list for PBXProject "VPMOTPView" */ = {
+		96EB10771E01B3AF0002682A /* Build configuration list for PBXProject "VPMOTPViewExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96EB108C1E01B3AF0002682A /* Debug */,
@@ -300,7 +308,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		96EB108E1E01B3AF0002682A /* Build configuration list for PBXNativeTarget "VPMOTPView" */ = {
+		96EB108E1E01B3AF0002682A /* Build configuration list for PBXNativeTarget "VPMOTPViewExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96EB108F1E01B3AF0002682A /* Debug */,

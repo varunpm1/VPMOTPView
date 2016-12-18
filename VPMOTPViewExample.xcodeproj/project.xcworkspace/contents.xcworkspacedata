@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:VPMOTPView.xcodeproj">
+      location = "self:/Users/varunpm/Desktop/work/GitHub/VPMOTPView/VPMOTPViewExample.xcodeproj">
    </FileRef>
 </Workspace>
