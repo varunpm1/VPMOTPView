@@ -1,6 +1,6 @@
 # VPMOTPView
 
-VPMOTPView is a helper class for displaying OTP entering view
+VPMOTPView is a helper class for displaying OTP entering view. The UI can be customized in different ways. See `Usage` for more info.
 
 ## Requirements
 
@@ -12,6 +12,10 @@ VPMOTPView is a helper class for displaying OTP entering view
 Drag and drop the folder `VPMOTPView` into your project. Add a view wherever needed in you xib or storyboard and change the parent class of the added view to `VPMOTPView`.
 
 Set the delegate of `VPMOTPView` instance, if needed, to handle 2 protocol methods for identifying if all the codes have been entered and to receive the entered code.
+
+The supported UI are - Circular, Square and Diamond shaped OTP fields.
+
+The UI can further be modified based on border color, background color, data input type, cursor color, secure field or not, Apple kind of OTP field etc. For a list of possible options please refer `VPMOTPView` class.
 
 # ![Screenshot](/Circular.png)
 # ![Screenshot](/Secure.png)
