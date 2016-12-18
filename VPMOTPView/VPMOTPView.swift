@@ -21,13 +21,13 @@ protocol VPMOTPViewDelegate: class {
 }
 
 class VPMOTPView: UIView {
-    /// Different display type for text fields
+    /// Different display type for text fields.
     enum DisplayType {
         case circular
         case square
     }
     
-    /// Different input type for OTP fields
+    /// Different input type for OTP fields.
     enum KeyboardType: Int {
         case numeric
         case alphabet
@@ -40,8 +40,17 @@ class VPMOTPView: UIView {
     /// Defines the number of OTP field needed. Defaults to 4.
     var otpFieldsCount: Int = 4
     
-    /// Defines the type of the data that can be entered into OTP fields. Defaults to `numeric`
+    /// Defines the type of the data that can be entered into OTP fields. Defaults to `numeric`.
     var otpFieldInputType: KeyboardType = .numeric
+    
+    /// Define the font to be used to OTP field. Defaults tp `systemFont` with size `20`.
+    var otpFieldFont: UIFont = UIFont.systemFont(ofSize: 20)
+    
+    /// If set to `true`, then the content inside OTP field will be displayed in asterisk (*) format. Defaults to `false`.
+    var otpFieldEntrySecureType: Bool = false
+    
+    /// If set to `true`, then the content inside OTP field will not be displayed. Instead whatever was set in `otpFieldEnteredBorderColor` will be used to mask the passcode. If `otpFieldEntrySecureType` is set to `true`, then it'll be ignored. This acts similar to Apple's lock code. Defaults to `false`.
+    var otpFilledEntryDisplay: Bool = false
     
     /// Defines the size of OTP field. Defaults to `60`.
     var otpFieldSize: CGFloat = 60
@@ -49,16 +58,27 @@ class VPMOTPView: UIView {
     /// Space between 2 OTP field. Defaults to `16`.
     var otpFieldSeparatorSpace: CGFloat = 16
     
-    /// Color to be used for border of the OTP field. Defaults to `black` color.
-    var otpFieldBorderColor: UIColor = UIColor.black
-    
     /// Border width to be used, if border is needed. Defaults to `2`.
     var otpFieldBorderWidth: CGFloat = 2
     
     /// If set, then editing can be done to intermediate fields even though previous fields are empty. Else editing will take place from last filled text field only. Defaults to `true`.
     var shouldAllowIntermediateEditing: Bool = true
     
+    /// Set this value if a background color is needed when a text is not enetered in the OTP field. Defaults to `clear` color.
+    var otpFieldDefaultBackgroundColor: UIColor = UIColor.clear
+    
+    /// Set this value if a background color is needed when a text is enetered in the OTP field. Defaults to `clear` color.
+    var otpFieldEnteredBackgroundColor: UIColor = UIColor.clear
+    
+    /// Set this value if a border color is needed when a text is not enetered in the OTP field. Defaults to `black` color.
+    var otpFieldDefaultBorderColor: UIColor = UIColor.black
+    
+    /// Set this value if a border color is needed when a text is enetered in the OTP field. Defaults to `black` color.
+    var otpFieldEnteredBorderColor: UIColor = UIColor.black
+    
     weak var delegate: VPMOTPViewDelegate?
+    
+    fileprivate var secureEntryData = [String]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -73,12 +93,16 @@ class VPMOTPView: UIView {
     //MARK: Private functions
     // Set up the fields
     fileprivate func initalizeOTPFields() {
+        secureEntryData.removeAll()
+        
         for index in stride(from: 0, to: otpFieldsCount, by: 1) {
             var otpField = viewWithTag(index + 1) as? VPMOTPTextField
             
             if otpField == nil {
                 otpField = getOTPField(forIndex: index)
             }
+            
+            secureEntryData.append("")
             
             self.addSubview(otpField!)
         }
@@ -89,6 +113,7 @@ class VPMOTPView: UIView {
         let otpField = VPMOTPTextField(frame: CGRect(x: CGFloat(index) * (otpFieldSize + otpFieldSeparatorSpace), y: 0, width: otpFieldSize, height: otpFieldSize))
         otpField.delegate = self
         otpField.tag = index + 1
+        otpField.font = otpFieldFont
         
         // Set input type for OTP fields
         switch otpFieldInputType {
@@ -101,8 +126,11 @@ class VPMOTPView: UIView {
         }
         
         // Set the border values if needed
-        otpField.borderColor = otpFieldBorderColor
+        otpField.borderColor = otpFieldDefaultBorderColor
         otpField.borderWidth = otpFieldBorderWidth
+        
+        // Set the default background color when text not set
+        otpField.backgroundColor = otpFieldDefaultBackgroundColor
         
         // Finally create the fields
         otpField.initalizeUI(forFieldType: otpFieldDisplayType)
@@ -146,11 +174,9 @@ class VPMOTPView: UIView {
             var enteredOTPString = ""
             
             // Check for entered OTP
-            for index in stride(from: 0, to: otpFieldsCount, by: 1) {
-                let otpField = viewWithTag(index + 1) as? VPMOTPTextField
-                
-                if let otpFieldText = otpField?.text, otpFieldText.characters.count > 0 {
-                    enteredOTPString.append(otpFieldText)
+            for index in stride(from: 0, to: secureEntryData.count, by: 1) {
+                if secureEntryData[index].characters.count > 0 {
+                    enteredOTPString.append(secureEntryData[index])
                 }
             }
             
@@ -179,7 +205,22 @@ extension VPMOTPView: UITextFieldDelegate {
         
         if replacedText.characters.count >= 1 {
             // If field has a text already, then replace the text and move to next field if present
-            textField.text = string
+            secureEntryData[textField.tag - 1] = string
+            
+            if otpFilledEntryDisplay {
+                textField.text = ""
+            }
+            else {
+                if otpFieldEntrySecureType {
+                    textField.text = "*"
+                }
+                else {
+                    textField.text = string
+                }
+            }
+            
+            textField.backgroundColor = otpFieldEnteredBackgroundColor
+            textField.layer.borderColor = otpFieldEnteredBorderColor.cgColor
             
             let nextOTPField = viewWithTag(textField.tag + 1)
             
@@ -192,12 +233,13 @@ extension VPMOTPView: UITextFieldDelegate {
             
             // Get the entered string
             calculateEnteredOTPSTring(isDeleted: false)
-            
-            return false
         }
-        else if replacedText.characters.count == 0 {
+        else {
             // If deleting the text, then move to previous text field if present
+            secureEntryData[textField.tag - 1] = ""
             textField.text = ""
+            textField.backgroundColor = otpFieldDefaultBackgroundColor
+            textField.layer.borderColor = otpFieldDefaultBorderColor.cgColor
             
             let prevOTPField = viewWithTag(textField.tag - 1)
             
@@ -207,15 +249,7 @@ extension VPMOTPView: UITextFieldDelegate {
             
             // Get the entered string
             calculateEnteredOTPSTring(isDeleted: true)
-            
-            return false
         }
-        
-        // If nothing, then set the text
-        textField.text = replacedText
-        
-        // Get the entered string
-        calculateEnteredOTPSTring(isDeleted: false)
         
         return false
     }

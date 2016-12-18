@@ -17,7 +17,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         otpView.otpFieldsCount = 5
-        otpView.otpFieldBorderColor = UIColor.red
+        otpView.otpFieldDefaultBorderColor = UIColor.blue
+        otpView.otpFieldEnteredBorderColor = UIColor.red
         otpView.otpFieldBorderWidth = 2
         otpView.delegate = self
         
