@@ -1,7 +1,7 @@
 //
 //  VPMOTPTextField.swift
 //  VPMOTPView
-//  Version 1.0.0
+//  Version 1.1.0
 //
 //  Created by Varun P M on 14/12/16.
 //  Copyright © 2016 Varun P M. All rights reserved.

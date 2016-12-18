@@ -13,15 +13,15 @@ Drag and drop the folder `VPMOTPView` into your project. Add a view wherever nee
 
 Set the delegate of `VPMOTPView` instance, if needed, to handle 2 protocol methods for identifying if all the codes have been entered and to receive the entered code.
 
-The supported UI are - Circular, Square and Diamond shaped OTP fields.
+The supported UI are - Circular, Square, Diamond and UnderlinedBottom shaped OTP fields.
 
 The UI can further be modified based on border color, background color, data input type, cursor color, secure field or not, Apple kind of OTP field etc. For a list of possible options please refer `VPMOTPView` class.
 
 # ![Screenshot](/Circular.png)
 # ![Screenshot](/Secure.png)
-
 # ![Screenshot](/Square.png)
 # ![Screenshot](/AppleFilled.png)
+# ![Screenshot](/UnderlinedBottom.png)
 
 ## Contributing
 **Type - 1**
@@ -42,7 +42,7 @@ The UI can further be modified based on border color, background color, data inp
 
 ### Version 1.0.0
 
-OTP view displaying with various customizations. It supports circular, square and diamond fields with secure entry, different keyboard inputs, filled type and border type. 
+OTP view displaying with various customizations. It supports circular, square, diamond and underlinedBottom fields with secure entry, different keyboard inputs, filled type and border type. 
 
 ## License
 MIT License
