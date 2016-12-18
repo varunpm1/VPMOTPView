@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		961D27771E06B80C00AEE0B4 /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D27751E06B80C00AEE0B4 /* VPMOTPTextField.swift */; };
-		961D27781E06B80C00AEE0B4 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D27761E06B80C00AEE0B4 /* VPMOTPView.swift */; };
+		961D277C1E06B86B00AEE0B4 /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D277A1E06B86B00AEE0B4 /* VPMOTPTextField.swift */; };
+		961D277D1E06B86B00AEE0B4 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961D277B1E06B86B00AEE0B4 /* VPMOTPView.swift */; };
 		96EB10801E01B3AF0002682A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB107F1E01B3AF0002682A /* AppDelegate.swift */; };
 		96EB10821E01B3AF0002682A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EB10811E01B3AF0002682A /* ViewController.swift */; };
 		96EB10851E01B3AF0002682A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96EB10831E01B3AF0002682A /* Main.storyboard */; };
@@ -17,8 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		961D27751E06B80C00AEE0B4 /* VPMOTPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
-		961D27761E06B80C00AEE0B4 /* VPMOTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
+		961D277A1E06B86B00AEE0B4 /* VPMOTPTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
+		961D277B1E06B86B00AEE0B4 /* VPMOTPView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
 		96EB107C1E01B3AF0002682A /* VPMOTPViewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VPMOTPViewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EB107F1E01B3AF0002682A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96EB10811E01B3AF0002682A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,14 +39,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		961D27741E06B80C00AEE0B4 /* VPMOTPView */ = {
+		961D27791E06B86B00AEE0B4 /* VPMOTPView */ = {
 			isa = PBXGroup;
 			children = (
-				961D27751E06B80C00AEE0B4 /* VPMOTPTextField.swift */,
-				961D27761E06B80C00AEE0B4 /* VPMOTPView.swift */,
+				961D277A1E06B86B00AEE0B4 /* VPMOTPTextField.swift */,
+				961D277B1E06B86B00AEE0B4 /* VPMOTPView.swift */,
 			);
-			path = VPMOTPView;
-			sourceTree = SOURCE_ROOT;
+			name = VPMOTPView;
+			path = ../../VPMOTPView;
+			sourceTree = "<group>";
 		};
 		96EB10731E01B3AF0002682A = {
 			isa = PBXGroup;
@@ -70,7 +71,7 @@
 				96EB107F1E01B3AF0002682A /* AppDelegate.swift */,
 				96EB10811E01B3AF0002682A /* ViewController.swift */,
 				96EB10831E01B3AF0002682A /* Main.storyboard */,
-				961D27741E06B80C00AEE0B4 /* VPMOTPView */,
+				961D27791E06B86B00AEE0B4 /* VPMOTPView */,
 				96EB10861E01B3AF0002682A /* Assets.xcassets */,
 				96EB10881E01B3AF0002682A /* LaunchScreen.storyboard */,
 				96EB108B1E01B3AF0002682A /* Info.plist */,
@@ -150,10 +151,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				961D27781E06B80C00AEE0B4 /* VPMOTPView.swift in Sources */,
+				961D277D1E06B86B00AEE0B4 /* VPMOTPView.swift in Sources */,
 				96EB10821E01B3AF0002682A /* ViewController.swift in Sources */,
 				96EB10801E01B3AF0002682A /* AppDelegate.swift in Sources */,
-				961D27771E06B80C00AEE0B4 /* VPMOTPTextField.swift in Sources */,
+				961D277C1E06B86B00AEE0B4 /* VPMOTPTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
