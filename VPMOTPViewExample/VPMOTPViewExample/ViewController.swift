@@ -34,6 +34,10 @@ class ViewController: UIViewController {
 
 
 extension ViewController: VPMOTPViewDelegate {
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
+        return true
+    }
+    
     func hasEnteredAllOTP(hasEntered: Bool) {
         print("Has entered all OTP? \(hasEntered)")
     }

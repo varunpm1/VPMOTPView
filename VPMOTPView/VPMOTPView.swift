@@ -32,6 +32,12 @@
 import UIKit
 
 protocol VPMOTPViewDelegate: class {
+    /// Called whenever the textfield has to become first responder. Called for the first field when loading
+    ///
+    /// - Parameter index: the index of the field. Index starts from 0.
+    /// - Returns: return true to show keyboard and vice versa
+    func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool
+    
     /// Called whenever all the OTP fields have been entered. It'll be called immediately after `hasEnteredAllOTP` delegate method is called.
     ///
     /// - parameter otpString: The entered otp characters
@@ -122,6 +128,9 @@ class VPMOTPView: UIView {
         self.layoutIfNeeded()
         
         initalizeOTPFields()
+        
+        // Forcefully try to make first otp field as first responder
+        (viewWithTag(1) as? VPMOTPTextField)?.becomeFirstResponder()
     }
     
     //MARK: Private functions
@@ -248,7 +257,12 @@ class VPMOTPView: UIView {
 
 extension VPMOTPView: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return isPreviousFieldsEntered(forTextField: textField)
+        let shouldBeginEditing = delegate?.shouldBecomeFirstResponderForOTP(otpFieldIndex: (textField.tag - 1)) ?? true
+        if shouldBeginEditing {
+            return isPreviousFieldsEntered(forTextField: textField)
+        }
+        
+        return shouldBeginEditing
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
