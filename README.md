@@ -44,6 +44,15 @@ The UI can further be modified based on border color, background color, data inp
 
 OTP view displaying with various customizations. It supports circular, square, diamond and underlinedBottom fields with secure entry, different keyboard inputs, filled type and border type. 
 
+### Version 1.1.0
+
+Added support for underlined bottom type text fields.
+
+### Version 1.1.1
+
+Added support for Swift 4 and auto highlight for first field on loading the view.
+
+
 ## License
 MIT License
 
