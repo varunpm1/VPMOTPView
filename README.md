@@ -52,6 +52,10 @@ Added support for underlined bottom type text fields.
 
 Added support for Swift 4 and auto highlight for first field on loading the view.
 
+### Version 1.1.2
+
+Added support for error border color when invalid OTP is entered.
+
 
 ## License
 MIT License
