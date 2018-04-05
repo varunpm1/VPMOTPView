@@ -12,13 +12,16 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var otpView: VPMOTPView!
     
+    var enteredOtp: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         otpView.otpFieldsCount = 5
         otpView.otpFieldDefaultBorderColor = UIColor.blue
-        otpView.otpFieldEnteredBorderColor = UIColor.red
+        otpView.otpFieldEnteredBorderColor = UIColor.green
+        otpView.otpFieldErrorBorderColor = UIColor.red
         otpView.otpFieldBorderWidth = 2
         otpView.delegate = self
         
@@ -34,15 +37,18 @@ class ViewController: UIViewController {
 
 
 extension ViewController: VPMOTPViewDelegate {
+    func hasEnteredAllOTP(hasEntered: Bool) -> Bool {
+        print("Has entered all OTP? \(hasEntered)")
+        
+        return enteredOtp == "12345"
+    }
+    
     func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
         return true
     }
     
-    func hasEnteredAllOTP(hasEntered: Bool) {
-        print("Has entered all OTP? \(hasEntered)")
-    }
-    
     func enteredOTP(otpString: String) {
+        enteredOtp = otpString
         print("OTPString: \(otpString)")
     }
 }

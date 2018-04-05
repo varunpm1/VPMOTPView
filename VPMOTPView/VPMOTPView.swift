@@ -40,13 +40,14 @@ protocol VPMOTPViewDelegate: class {
     
     /// Called whenever all the OTP fields have been entered. It'll be called immediately after `hasEnteredAllOTP` delegate method is called.
     ///
-    /// - parameter otpString: The entered otp characters
+    /// - Parameter otpString: The entered otp characters
     func enteredOTP(otpString: String)
     
     /// Called whenever an OTP is entered.
     ///
-    /// - parameter hasEntered: `hasEntered` will be `true` if all the OTP fields have been filled.
-    func hasEnteredAllOTP(hasEntered: Bool)
+    /// - Parameter hasEntered: `hasEntered` will be `true` if all the OTP fields have been filled.
+    /// - Returns: return if OTP entered is valid or not. If false and all otp has been entered, then error
+    func hasEnteredAllOTP(hasEntered: Bool) -> Bool
 }
 
 class VPMOTPView: UIView {
@@ -112,6 +113,9 @@ class VPMOTPView: UIView {
     
     /// Set this value if a border color is needed when a text is enetered in the OTP field. Defaults to `black` color.
     var otpFieldEnteredBorderColor: UIColor = UIColor.black
+    
+    /// Optional value if a border color is needed when the otp entered is invalid/incorrect.
+    var otpFieldErrorBorderColor: UIColor?
     
     weak var delegate: VPMOTPViewDelegate?
     
@@ -213,7 +217,7 @@ class VPMOTPView: UIView {
             for index in stride(from: textField.tag + 1, to: otpFieldsCount + 1, by: 1) {
                 let tempNextOTPField = viewWithTag(index) as? UITextField
                 
-                if let tempNextOTPFieldText = tempNextOTPField?.text, tempNextOTPFieldText.characters.count != 0 {
+                if let tempNextOTPFieldText = tempNextOTPField?.text, !tempNextOTPFieldText.isEmpty {
                     nextOTPField = tempNextOTPField
                 }
             }
@@ -233,23 +237,40 @@ class VPMOTPView: UIView {
     // Helper function to get the OTP String entered
     fileprivate func calculateEnteredOTPSTring(isDeleted: Bool) {
         if isDeleted {
-            delegate?.hasEnteredAllOTP(hasEntered: false)
+            _ = delegate?.hasEnteredAllOTP(hasEntered: false)
         }
         else {
             var enteredOTPString = ""
             
             // Check for entered OTP
             for index in stride(from: 0, to: secureEntryData.count, by: 1) {
-                if secureEntryData[index].characters.count > 0 {
+                if !secureEntryData[index].isEmpty {
                     enteredOTPString.append(secureEntryData[index])
                 }
             }
             
-            // Check if all OTP fields have been filled or not. Based on that call the 2 delegate methods.
-            delegate?.hasEnteredAllOTP(hasEntered: (enteredOTPString.characters.count == otpFieldsCount))
-            
-            if enteredOTPString.characters.count == otpFieldsCount {
+            if enteredOTPString.count == otpFieldsCount {
                 delegate?.enteredOTP(otpString: enteredOTPString)
+                
+                // Check if all OTP fields have been filled or not. Based on that call the 2 delegate methods.
+                let isValid = delegate?.hasEnteredAllOTP(hasEntered: (enteredOTPString.count == otpFieldsCount)) ?? false
+                
+                // Set the error state for invalid otp entry
+                for index in stride(from: 0, to: otpFieldsCount, by: 1) {
+                    var otpField = viewWithTag(index + 1) as? VPMOTPTextField
+                    
+                    if otpField == nil {
+                        otpField = getOTPField(forIndex: index)
+                    }
+                    
+                    if !isValid {
+                        // Set error border color if set, if not, set default border color
+                        otpField?.layer.borderColor = (otpFieldErrorBorderColor ?? otpFieldEnteredBorderColor).cgColor
+                    }
+                    else {
+                        otpField?.layer.borderColor = otpFieldEnteredBorderColor.cgColor
+                    }
+                }
             }
         }
     }
@@ -269,11 +290,11 @@ extension VPMOTPView: UITextFieldDelegate {
         let replacedText = (textField.text as NSString?)?.replacingCharacters(in: range, with: string) ?? ""
         
         // Check since only alphabet keyboard is not available in iOS
-        if replacedText.characters.count > 0 && otpFieldInputType == .alphabet && replacedText.rangeOfCharacter(from: .letters) == nil {
+        if !replacedText.isEmpty && otpFieldInputType == .alphabet && replacedText.rangeOfCharacter(from: .letters) == nil {
             return false
         }
         
-        if replacedText.characters.count >= 1 {
+        if replacedText.count >= 1 {
             // If field has a text already, then replace the text and move to next field if present
             secureEntryData[textField.tag - 1] = string
             
