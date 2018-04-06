@@ -56,6 +56,10 @@ Added support for Swift 4 and auto highlight for first field on loading the view
 
 Added support for error border color when invalid OTP is entered.
 
+### Version 1.1.3
+
+Fixed delete backward issue when field is empty.
+
 
 ## License
 MIT License

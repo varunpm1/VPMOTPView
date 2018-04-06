@@ -1,7 +1,7 @@
 //
 //  VPMOTPTextField.swift
 //  VPMOTPView
-//  Version 1.1.2
+//  Version 1.1.3
 //
 //  Created by Varun P M on 14/12/16.
 //  Copyright © 2016 Varun P M. All rights reserved.
@@ -72,6 +72,12 @@ class VPMOTPTextField: UITextField {
         
         autocorrectionType = .no
         textAlignment = .center
+    }
+    
+    override func deleteBackward() {
+        super.deleteBackward()
+        
+        _ = delegate?.textField?(self, shouldChangeCharactersIn: NSMakeRange(0, 0), replacementString: "")
     }
     
     // Helper function to create diamond view

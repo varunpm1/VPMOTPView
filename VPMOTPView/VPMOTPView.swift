@@ -1,7 +1,7 @@
 //
 //  VPMOTPView.swift
 //  VPMOTPView
-//  Version 1.1.2
+//  Version 1.1.3
 //
 //  Created by Varun P M on 14/12/16.
 //  Copyright © 2016 Varun P M. All rights reserved.
