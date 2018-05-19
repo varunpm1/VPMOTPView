@@ -143,15 +143,13 @@ class VPMOTPView: UIView {
         secureEntryData.removeAll()
         
         for index in stride(from: 0, to: otpFieldsCount, by: 1) {
-            var otpField = viewWithTag(index + 1) as? VPMOTPTextField
+            let oldOtpField = viewWithTag(index + 1) as? VPMOTPTextField
+            oldOtpField?.removeFromSuperview()
             
-            if otpField == nil {
-                otpField = getOTPField(forIndex: index)
-            }
+            let otpField = getOTPField(forIndex: index)
+            self.addSubview(otpField)
             
             secureEntryData.append("")
-            
-            self.addSubview(otpField!)
         }
     }
     
