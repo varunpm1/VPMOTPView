@@ -60,6 +60,10 @@ Added support for error border color when invalid OTP is entered.
 
 Fixed delete backward issue when field is empty.
 
+### Version 1.1.4
+
+Fixed intermediate editing false issue.
+
 
 ## License
 MIT License

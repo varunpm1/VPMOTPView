@@ -24,9 +24,10 @@ class ViewController: UIViewController {
         otpView.otpFieldErrorBorderColor = UIColor.red
         otpView.otpFieldBorderWidth = 2
         otpView.delegate = self
+        otpView.shouldAllowIntermediateEditing = false
         
         // Create the UI
-        otpView.initalizeUI()
+        otpView.initializeUI()
     }
 
     override func didReceiveMemoryWarning() {

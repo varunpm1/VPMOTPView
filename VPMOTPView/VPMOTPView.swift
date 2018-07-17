@@ -127,11 +127,11 @@ class VPMOTPView: UIView {
     
     //MARK: Public functions
     /// Call this method to create the OTP field view. This method should be called at the last after necessary customization needed. If any property is modified at a later stage is simply ignored.
-    func initalizeUI() {
+    func initializeUI() {
         self.layer.masksToBounds = true
         self.layoutIfNeeded()
         
-        initalizeOTPFields()
+        initializeOTPFields()
         
         // Forcefully try to make first otp field as first responder
         (viewWithTag(1) as? VPMOTPTextField)?.becomeFirstResponder()
@@ -139,7 +139,7 @@ class VPMOTPView: UIView {
     
     //MARK: Private functions
     // Set up the fields
-    fileprivate func initalizeOTPFields() {
+    fileprivate func initializeOTPFields() {
         secureEntryData.removeAll()
         
         for index in stride(from: 0, to: otpFieldsCount, by: 1) {
@@ -210,22 +210,20 @@ class VPMOTPView: UIView {
         var isTextFilled = true
         var nextOTPField: UITextField?
         
-        // If intermediate editing is not allowed, then check for last filled from the current field in forward direction.
+        // If intermediate editing is not allowed, then check for last filled field in forward direction.
         if !shouldAllowIntermediateEditing {
-            for index in stride(from: textField.tag + 1, to: otpFieldsCount + 1, by: 1) {
+            for index in stride(from: 1, to: otpFieldsCount + 1, by: 1) {
                 let tempNextOTPField = viewWithTag(index) as? UITextField
                 
-                if let tempNextOTPFieldText = tempNextOTPField?.text, !tempNextOTPFieldText.isEmpty {
+                if let tempNextOTPFieldText = tempNextOTPField?.text, tempNextOTPFieldText.isEmpty {
                     nextOTPField = tempNextOTPField
+                    
+                    break
                 }
             }
             
             if let nextOTPField = nextOTPField {
-                if nextOTPField != textField {
-                    nextOTPField.becomeFirstResponder()
-                }
-                
-                isTextFilled = false
+                isTextFilled = (nextOTPField == textField || (textField.tag) == (nextOTPField.tag - 1))
             }
         }
         
