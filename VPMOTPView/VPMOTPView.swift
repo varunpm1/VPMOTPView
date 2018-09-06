@@ -328,29 +328,47 @@ extension VPMOTPView: UITextFieldDelegate {
             calculateEnteredOTPSTring(isDeleted: false)
         }
         else {
-            // If deleting the text, then move to previous text field if present
-            secureEntryData[textField.tag - 1] = ""
-            textField.text = ""
-            
-            if otpFieldDisplayType == .diamond || otpFieldDisplayType == .underlinedBottom {
-                (textField as! VPMOTPTextField).shapeLayer.fillColor = otpFieldDefaultBackgroundColor.cgColor
-                (textField as! VPMOTPTextField).shapeLayer.strokeColor = otpFieldDefaultBorderColor.cgColor
+            if textField.tag > 1 {
+                let currentText = textField.text ?? ""
+                self.deleteText(textField: textField)
+
+                if currentText.isEmpty {
+                    if let prevOTPField = viewWithTag(textField.tag - 1) as? UITextField {
+                        self.deleteText(textField: prevOTPField)
+                    }
+                }
+            } else {
+                self.deleteText(textField: textField)
             }
-            else {
-                textField.backgroundColor = otpFieldDefaultBackgroundColor
-                textField.layer.borderColor = otpFieldDefaultBorderColor.cgColor
-            }
-            
-            let prevOTPField = viewWithTag(textField.tag - 1)
-            
-            if let prevOTPField = prevOTPField {
-                prevOTPField.becomeFirstResponder()
-            }
-            
-            // Get the entered string
-            calculateEnteredOTPSTring(isDeleted: true)
         }
         
         return false
+    }
+
+
+    func deleteText(textField: UITextField) {
+
+        let currentText = textField.text ?? ""
+
+        // If deleting the text, then move to previous text field if present
+        secureEntryData[textField.tag - 1] = ""
+        textField.text = ""
+
+        if otpFieldDisplayType == .diamond || otpFieldDisplayType == .underlinedBottom {
+            (textField as! VPMOTPTextField).shapeLayer.fillColor = otpFieldDefaultBackgroundColor.cgColor
+            (textField as! VPMOTPTextField).shapeLayer.strokeColor = otpFieldDefaultBorderColor.cgColor
+        } else {
+            textField.backgroundColor = otpFieldDefaultBackgroundColor
+            textField.layer.borderColor = otpFieldDefaultBorderColor.cgColor
+        }
+
+        if currentText.isEmpty {
+            if let prevOTPField = viewWithTag(textField.tag - 1) {
+                prevOTPField.becomeFirstResponder()
+            }
+        }
+
+        // Get the entered string
+        calculateEnteredOTPSTring(isDeleted: true)
     }
 }
