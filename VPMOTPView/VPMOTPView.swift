@@ -128,8 +128,8 @@ class VPMOTPView: UIView {
     //MARK: Public functions
     /// Call this method to create the OTP field view. This method should be called at the last after necessary customization needed. If any property is modified at a later stage is simply ignored.
     func initializeUI() {
-        self.layer.masksToBounds = true
-        self.layoutIfNeeded()
+        layer.masksToBounds = true
+        layoutIfNeeded()
         
         initializeOTPFields()
         
@@ -147,7 +147,7 @@ class VPMOTPView: UIView {
             oldOtpField?.removeFromSuperview()
             
             let otpField = getOTPField(forIndex: index)
-            self.addSubview(otpField)
+            addSubview(otpField)
             
             secureEntryData.append("")
         }
@@ -234,6 +234,26 @@ class VPMOTPView: UIView {
     fileprivate func calculateEnteredOTPSTring(isDeleted: Bool) {
         if isDeleted {
             _ = delegate?.hasEnteredAllOTP(hasEntered: false)
+            
+            // Set the default enteres state for otp entry
+            for index in stride(from: 0, to: otpFieldsCount, by: 1) {
+                var otpField = viewWithTag(index + 1) as? VPMOTPTextField
+                
+                if otpField == nil {
+                    otpField = getOTPField(forIndex: index)
+                }
+                
+                let fieldBackgroundColor = (otpField?.text ?? "").isEmpty ? otpFieldDefaultBackgroundColor : otpFieldEnteredBackgroundColor
+                let fieldBorderColor = (otpField?.text ?? "").isEmpty ? otpFieldDefaultBorderColor : otpFieldEnteredBorderColor
+                
+                if otpFieldDisplayType == .diamond || otpFieldDisplayType == .underlinedBottom {
+                    otpField?.shapeLayer.fillColor = fieldBackgroundColor.cgColor
+                    otpField?.shapeLayer.strokeColor = fieldBorderColor.cgColor
+                } else {
+                    otpField?.backgroundColor = fieldBackgroundColor
+                    otpField?.layer.borderColor = fieldBorderColor.cgColor
+                }
+            }
         }
         else {
             var enteredOTPString = ""
@@ -328,32 +348,31 @@ extension VPMOTPView: UITextFieldDelegate {
             calculateEnteredOTPSTring(isDeleted: false)
         }
         else {
-            if textField.tag > 1 {
-                let currentText = textField.text ?? ""
-                self.deleteText(textField: textField)
-
-                if currentText.isEmpty {
-                    if let prevOTPField = viewWithTag(textField.tag - 1) as? UITextField {
-                        self.deleteText(textField: prevOTPField)
-                    }
+            let currentText = textField.text ?? ""
+            
+            if textField.tag > 1 && currentText.isEmpty {
+                if let prevOTPField = viewWithTag(textField.tag - 1) as? UITextField {
+                    deleteText(in: prevOTPField)
                 }
             } else {
-                self.deleteText(textField: textField)
+                deleteText(in: textField)
+                
+                if textField.tag > 1 {
+                    if let prevOTPField = viewWithTag(textField.tag - 1) as? UITextField {
+                        prevOTPField.becomeFirstResponder()
+                    }
+                }
             }
         }
         
         return false
     }
-
-
-    func deleteText(textField: UITextField) {
-
-        let currentText = textField.text ?? ""
-
+    
+    private func deleteText(in textField: UITextField) {
         // If deleting the text, then move to previous text field if present
         secureEntryData[textField.tag - 1] = ""
         textField.text = ""
-
+        
         if otpFieldDisplayType == .diamond || otpFieldDisplayType == .underlinedBottom {
             (textField as! VPMOTPTextField).shapeLayer.fillColor = otpFieldDefaultBackgroundColor.cgColor
             (textField as! VPMOTPTextField).shapeLayer.strokeColor = otpFieldDefaultBorderColor.cgColor
@@ -361,13 +380,9 @@ extension VPMOTPView: UITextFieldDelegate {
             textField.backgroundColor = otpFieldDefaultBackgroundColor
             textField.layer.borderColor = otpFieldDefaultBorderColor.cgColor
         }
-
-        if currentText.isEmpty {
-            if let prevOTPField = viewWithTag(textField.tag - 1) {
-                prevOTPField.becomeFirstResponder()
-            }
-        }
-
+        
+        textField.becomeFirstResponder()
+        
         // Get the entered string
         calculateEnteredOTPSTring(isDeleted: true)
     }
