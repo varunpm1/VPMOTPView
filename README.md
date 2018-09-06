@@ -64,6 +64,10 @@ Fixed delete backward issue when field is empty.
 
 Fixed intermediate editing false issue.
 
+### Version 1.1.5
+
+Code refactoring and fixed error state reset issue.
+
 
 ## License
 MIT License
